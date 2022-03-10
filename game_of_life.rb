@@ -8,13 +8,31 @@ class GameOfLife
         new_state_of_cell(cell, living_neighbours_count)
       end
     end
+    
   end
 
   def new_state_of_cell(cell, living_neighbours_count)
-    cell
+    if living_neighbours_count == 3
+      return :live 
+    elsif living_neighbours_count == 2
+      return cell
+    else
+     return :dead
+    end 
   end
 
   def number_of_living_neighbours(cell_row, cell_column, grid)
-    0
+
+    count = 0
+
+    grid.each do |subarray|
+      subarray.each do |cell|
+        if cell == :live
+          count += 1
+        end
+      end 
+    end   
+
+    return count 
   end
 end
