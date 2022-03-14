@@ -247,6 +247,50 @@ describe GameOfLife do
     end
   end
 
+  context '#number_of_living_neighbours' do
+    it 'returns 2 given a cell in a 5x5 grid with 2 living neighbours and does not count living cells outside of direct neighboorhood' do
+      target_cell = :dead
+
+      some_cells = [
+          [ :dead, :dead, :dead,        :dead, :live ],
+          [ :dead, :dead, :live,        :dead, :dead ],
+          [ :dead, :dead, :target_cell, :dead, :dead ],
+          [ :dead, :dead, :live,        :dead, :dead ],
+          [ :live, :dead, :dead,        :dead, :dead ]
+        ]
+
+      cell_row = 2
+      cell_column = 2
+
+      expect(
+        subject.number_of_living_neighbours(cell_row, cell_column, some_cells)
+      ).to eq(2)
+    end
+  end
+
+  
+  context '#number_of_living_neighbours' do
+    context 'does not need to be specified cell_row and cell_column, find it by itself' do
+      it 'returns 2 given a cell in a 5x5 grid with 2 living neighbours and does not count living cells outside of direct neighboorhood' do
+        target_cell = :dead
+
+        some_cells = [
+            [ :dead, :dead, :dead,        :dead, :live ],
+            [ :dead, :dead, :live,        :dead, :dead ],
+            [ :dead, :dead, :target_cell, :dead, :dead ],
+            [ :dead, :dead, :live,        :dead, :dead ],
+            [ :live, :dead, :dead,        :dead, :dead ]
+          ]
+
+        # cell_row = 2
+        # cell_column = 2
+
+        expect(
+          subject.number_of_living_neighbours(cell_row, cell_column, some_cells) #cell_row is the problem here
+        ).to eq(2)
+      end
+    end
+  end
 
   
 
