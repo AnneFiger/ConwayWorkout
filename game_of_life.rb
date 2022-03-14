@@ -3,7 +3,7 @@ class GameOfLife
     new_grid = current_grid
 
     new_grid.map.with_index { |row, row_index|
-      row.map.with_index { |cell, column_index| #return row_index somehow?
+      row.map.with_index { |cell, column_index| #return row_index somehow?/ do number_of_living neighbours separately above?
         living_neighbours_count = number_of_living_neighbours(row_index, column_index, new_grid)
         new_state_of_cell(cell, living_neighbours_count)
       }
@@ -36,6 +36,7 @@ class GameOfLife
     lookup_row3 = immediate_neighboorhood_rows[2]
     immediate_neighboorhood.push(lookup_row3[cell_column-1..cell_column+1])
 
+    
 
     count = 0
 
@@ -45,8 +46,11 @@ class GameOfLife
           count += 1
         end
       end 
-    end   
-
+    end 
+        #  need to remove target cell from the count  
+    if grid[cell_row][cell_column] == :live
+      count -=1
+    end  
     return count 
   end
 end
